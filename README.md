@@ -110,11 +110,11 @@ Browse metadata organized by folders. Click to expand and see nested items. Sear
 ## 📸 Screenshots
 
 ### Main Interface
-![Main Interface](https://raw.githubusercontent.com/vishugrade/sf-metadata-exporter/main/images/1.jpg)
+![Main Interface](https://raw.githubusercontent.com/vishugrade7/sf-metadata-exporter/main/images/1.jpg)
 *Browse metadata types with hierarchical folder navigation*
 
 ### Advanced Filtering
-![Advanced Filtering](https://raw.githubusercontent.com/vishugrade/sf-metadata-exporter/main/images/2.jpg)
+![Advanced Filtering](https://raw.githubusercontent.com/vishugrade7/sf-metadata-exporter/main/images/2.jpg)
 *Filter by user, date, and search with real-time results*
 
 
