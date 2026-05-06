@@ -2,12 +2,12 @@
   "name": "sf-metadata-exporter",
   "displayName": "Salesforce Metadata Exporter",
   "description": "Fastest Salesforce metadata exporter with advanced filters.",
-  "version": "1.1.35",
+  "version": "1.1.36",
   "icon": "icon.png",
-  "publisher": "vishugrade7",
+  "publisher": "VishuGrade",
   "repository": {
     "type": "git",
-    "url": "https://github.com/vishugrade7/sf-metadata-exporter"
+    "url": "https://github.com/vishugrade7/sf-metadata-exporter.git"
   },
   "engines": {
     "vscode": "^1.80.0"
