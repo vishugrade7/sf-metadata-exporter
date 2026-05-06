@@ -1,0 +1,34 @@
+**/.DS_Store
+**/._*
+**/*.map
+**/*.tsbuildinfo
+.vscode/**
+src/*.ts
+src/salesforce.ts
+tsconfig.json
+esbuild.config.mjs
+package-lock.json
+*.vsix
+node_modules/**
+
+# Include all webview files first, then exclude unneeded ones
+!src/webview/**
+._*
+src/webview/._*
+src/webview/.DS_Store
+src/webview/**/._*
+src/webview/**/.DS_Store
+src/webview/._index.html
+src/webview/._main.js
+src/webview/._style.css
+
+# Exclude unnecessary Font Awesome directories/files
+src/webview/vendor/fontawesome/js/**
+src/webview/vendor/fontawesome/less/**
+src/webview/vendor/fontawesome/metadata/**
+src/webview/vendor/fontawesome/scss/**
+src/webview/vendor/fontawesome/sprites/**
+src/webview/vendor/fontawesome/svgs/**
+src/webview/vendor/fontawesome/LICENSE.txt
+src/webview/vendor/fontawesome/README.md
+src/webview/vendor/fontawesome/package.json

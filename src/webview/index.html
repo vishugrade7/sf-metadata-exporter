@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metadata Exporter</title>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Sidebar: Metadata Types -->
+        <div class="sidebar">
+            <div class="header">
+                <h2>Metadata Types</h2>
+                <div class="actions">
+                    <button id="sidebar-pin-btn" class="icon-btn sidebar-action-btn" title="Pin sidebar (disable auto-minimize)" aria-label="Pin sidebar" aria-pressed="false">
+                        <i class="fas fa-thumbtack"></i>
+                    </button>
+                    <button id="sidebar-collapse-btn" class="icon-btn sidebar-action-btn" title="Collapse sidebar" aria-label="Collapse sidebar" aria-pressed="false">
+                        <i class="fas fa-angle-double-left"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="search-box">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="type-search" placeholder="Filter Types...">
+            </div>
+            <div class="list-container" id="type-list">
+                <!-- Loading Skeleton for Sidebar -->
+                <div class="skeleton-sidebar-item">
+                    <div class="skeleton-sidebar-icon"></div>
+                    <div class="skeleton-sidebar-text"></div>
+                </div>
+                <div class="skeleton-sidebar-item">
+                    <div class="skeleton-sidebar-icon"></div>
+                    <div class="skeleton-sidebar-text" style="max-width: 50%;"></div>
+                </div>
+                <div class="skeleton-sidebar-item">
+                    <div class="skeleton-sidebar-icon"></div>
+                    <div class="skeleton-sidebar-text" style="max-width: 80%;"></div>
+                </div>
+                <div class="skeleton-sidebar-item">
+                    <div class="skeleton-sidebar-icon"></div>
+                    <div class="skeleton-sidebar-text"></div>
+                </div>
+                <div class="skeleton-sidebar-item">
+                    <div class="skeleton-sidebar-icon"></div>
+                    <div class="skeleton-sidebar-text" style="max-width: 60%;"></div>
+                </div>
+                <div class="skeleton-sidebar-item">
+                    <div class="skeleton-sidebar-icon"></div>
+                    <div class="skeleton-sidebar-text" style="max-width: 40%;"></div>
+                </div>
+                <div class="skeleton-sidebar-item">
+                    <div class="skeleton-sidebar-icon"></div>
+                    <div class="skeleton-sidebar-text" style="max-width: 70%;"></div>
+                </div>
+                <div class="skeleton-sidebar-item">
+                    <div class="skeleton-sidebar-icon"></div>
+                    <div class="skeleton-sidebar-text"></div>
+                </div>
+                <div class="skeleton-sidebar-item">
+                    <div class="skeleton-sidebar-icon"></div>
+                    <div class="skeleton-sidebar-text" style="max-width: 55%;"></div>
+                </div>
+                <div class="skeleton-sidebar-item">
+                    <div class="skeleton-sidebar-icon"></div>
+                    <div class="skeleton-sidebar-text" style="max-width: 75%;"></div>
+                </div>
+                <div class="skeleton-sidebar-item">
+                    <div class="skeleton-sidebar-icon"></div>
+                    <div class="skeleton-sidebar-text" style="max-width: 45%;"></div>
+                </div>
+                <div class="skeleton-sidebar-item">
+                    <div class="skeleton-sidebar-icon"></div>
+                    <div class="skeleton-sidebar-text"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content: Metadata Members -->
+        <div id="resizer" class="resizer"></div>
+        <div class="main-content">
+            <div class="content-header">
+                <div class="header-info">
+                    <span class="label">Select Type</span>
+                    <h2 id="selected-type-display">None</h2>
+                </div>
+                <div class="actions-right">
+                    <div class="action-row top-row">
+                        <button id="settings-btn" class="icon-btn" title="Column Settings"><i class="fas fa-cog"></i></button>
+                        <button id="theme-toggle-btn" class="icon-btn" title="Switch Theme"><i class="fas fa-moon"></i></button>
+                        <button id="help-btn" class="icon-btn" title="Tutorial Guide"><i class="fas fa-question-circle"></i></button>
+                        <button id="clear-all-btn" class="icon-btn" title="Unselect All"><i class="fas fa-minus-circle"></i></button>
+                        <button id="copy-btn" class="icon-btn" title="Copy to Clipboard"><i class="fas fa-copy"></i></button>
+                    </div>
+                    <div class="action-row bottom-row">
+                        <button id="update-btn" class="action-primary-btn" title="Update package.xml">
+                            <i class="fas fa-file-code"></i>
+                            <span>Update package.xml</span>
+                            <span id="selection-badge" class="badge hidden">0</span>
+                        </button>
+                        <button id="retrieve-btn" class="action-secondary-btn" title="Retrieve metadata from Salesforce org using manifest/package.xml">
+                            <i class="fas fa-cloud-download-alt"></i>
+                            <span>Retrieve</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-bar">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input class="search-input" type="text" id="member-search" placeholder="Filter Members...">
+                </div>
+                <div class="filters-right">
+                    <button id="lock-btn" class="icon-btn" title="Lock Filters">
+                        <i class="fas fa-unlock"></i>
+                    </button>
+                    <div class="filter-pill">
+                        <i class="fas fa-user"></i>
+                        <div class="custom-select" id="user-filter">
+                            <button class="custom-select-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+                                <span class="custom-select-value">All Users</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="custom-select-dropdown" role="listbox" aria-label="User filter">
+                                <div class="custom-select-search">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" class="custom-select-search-input" placeholder="Search users..." />
+                                </div>
+                                <div class="custom-select-options"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-pill date-pill" title="Modified From">
+                        <i class="fas fa-calendar-alt"></i>
+                        <input type="date" id="date-filter-start" name="start-date">
+                    </div>
+                    <div class="filter-pill date-pill" title="Modified To">
+                        <i class="fas fa-calendar-alt"></i>
+                        <input type="date" id="date-filter-end" name="end-date">
+                    </div>
+                </div>
+            </div>
+
+            <div class="members-container" id="members-list">
+                <div class="member-list-header">
+                    <div class="col-check-header">
+                        <input type="checkbox" id="select-all-checkbox" title="Select Current View Only">
+                    </div>
+                    <div class="col-name" id="sort-name" data-sort="name">
+                        Name <i class="fas fa-sort sort-icon"></i>
+                        <button id="select-filtered-btn" class="mini-btn" title="Select All Filtered">
+                            <i class="fas fa-check-double"></i> Select Filtered
+                        </button>
+                        <label class="mini-btn wildcard-btn" for="wildcard-checkbox" title="Use * for this type in package.xml">
+                            <input type="checkbox" id="wildcard-checkbox" style="display: none;">
+                            <i class="fas fa-star" id="wildcard-icon"></i> Wildcard (*)
+                        </label>
+                    </div>
+                    <div class="col-user" id="sort-user" data-sort="user">Modified By <i class="fas fa-sort sort-icon"></i></div>
+                    <div class="col-date" id="sort-date" data-sort="date">Modified Date <i class="fas fa-sort sort-icon"></i></div>
+                    <div class="col-created-user hidden" id="sort-created-user" data-sort="createdByName">Created By <i class="fas fa-sort sort-icon"></i></div>
+                    <div class="col-created-date hidden" id="sort-created-date" data-sort="createdDate">Created Date <i class="fas fa-sort sort-icon"></i></div>
+                    <div class="col-actions-header">Org</div>
+                </div>
+                <div id="wildcard-warning" class="wildcard-warning hidden" role="status" aria-live="polite"></div>
+                <div id="members-content">
+                    <div class="empty-state">
+                        <p>Select a metadata type to begin</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Bar -->
+        <div class="footer-bar">
+            <div class="footer-buttons">
+                <a href="https://www.linkedin.com/in/vishugrade/" target="_blank" class="footer-btn linkedin-btn"
+                    title="Connect on LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://buymeacoffee.com/vishugradeb" target="_blank" class="footer-btn coffee-btn"
+                    title="Buy Me a Coffee">
+                    <i class="fas fa-coffee"></i>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Column Settings Modal -->
+    <div id="settings-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fas fa-columns"></i> Visible Columns</h3>
+                <button id="close-settings-btn" class="icon-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="settings-list">
+                    <label class="settings-item">
+                        <input type="checkbox" data-column="col-user" checked> Last Modified By
+                    </label>
+                    <label class="settings-item">
+                        <input type="checkbox" data-column="col-date" checked> Modified Date
+                    </label>
+                    <label class="settings-item">
+                        <input type="checkbox" data-column="col-created-user"> Created By
+                    </label>
+                    <label class="settings-item">
+                        <input type="checkbox" data-column="col-created-date"> Created Date
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Guided Tour -->
+    <div id="tutorial-tour" class="tour-container hidden">
+        <div id="tour-spotlight" class="tour-spotlight"></div>
+        <div id="tour-tooltip" class="tour-tooltip">
+            <button id="tour-close" class="tour-close" title="Close tour">&times;</button>
+            <div class="tooltip-arrow"></div>
+            <div class="tooltip-content">
+                <h4 id="tour-title"></h4>
+                <p id="tour-text"></p>
+            </div>
+            <div class="tooltip-footer">
+                <div id="tour-dots" class="tour-dots"></div>
+                <div class="tour-actions">
+                    <button id="tour-prev" class="mini-btn" type="button">Back</button>
+                    <button id="tour-next" class="mini-btn" type="button">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Support Banner -->
+    <div id="support-banner" class="support-banner">
+        <button id="close-support-banner" class="close-banner" title="Dismiss">&times;</button>
+        <div class="support-content">
+            <div class="support-info">
+                <span class="support-title">Support the Developer</span>
+                <span class="support-desc">Help me keep this tool free and regularly updated!</span>
+            </div>
+            <div class="support-links">
+                <a href="https://linkedin.com/in/vishugrade" target="_blank" class="support-link" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i> <span>Connect</span>
+                </a>
+                <a href="https://buymeacoffee.com/vishugradeb" target="_blank" class="support-link coffee-link" title="Buy Me a Coffee">
+                    <i class="fas fa-coffee"></i> <span>Support</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
